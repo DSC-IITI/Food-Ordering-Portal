@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .serializers import HotelSerializer, FoodItemSerializer
+from .serializers import HotelSerializer, FoodItemSerializer, HotelDetailSerializer
 from .models import Hotel, FoodItem
 
 class HotelList(generics.ListCreateAPIView):
@@ -8,7 +8,7 @@ class HotelList(generics.ListCreateAPIView):
 
 class HotelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Hotel.objects.all()
-    serializer_class = HotelSerializer
+    serializer_class = HotelDetailSerializer
 
 class FoodItemList(generics.ListCreateAPIView):
     queryset = FoodItem.objects.all()
