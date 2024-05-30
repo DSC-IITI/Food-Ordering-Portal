@@ -1,5 +1,6 @@
 from django.urls import path
 from business.views import HotelList, HotelDetail, FoodItemList, FoodItemDetail
+from authentication.views import CheckAuthentication
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -21,5 +22,6 @@ urlpatterns = [
     path('hotels/<int:pk>/', HotelDetail.as_view()),
     path('food-item/', FoodItemList.as_view()),
     path('food-item/<int:pk>', FoodItemDetail.as_view()),
+    path('is_authenticated', CheckAuthentication.as_view())
 ]
 
