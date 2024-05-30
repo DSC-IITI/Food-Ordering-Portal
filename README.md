@@ -5,6 +5,7 @@
 - Made using React with Next-js
 
       // To run
+
       cd ./frontend
       yarn dev
 
@@ -15,6 +16,9 @@ You can view the frontend at http://localhost:3000/
 - Made using Django
 
       // To run backend
+
+      cd ./backend
+      pip intall -r requirements.txt
       python manage.py makemigrations
       python manage.py migrate
       python manage.py runserver
