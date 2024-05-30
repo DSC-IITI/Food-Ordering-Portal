@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def display(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, proceed to api/v1 for backend")
