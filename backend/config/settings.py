@@ -18,8 +18,9 @@ import os
 env = environ.Env()
 environ.Env.read_env(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))  # Reads the .env file
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# URLS
 BASE_DIR = Path(__file__).resolve().parent.parent
+CLOUDINARY_URL = env('CLOUDINARY_URL')
 
 
 # Quick-start development settings - unsuitable for production
@@ -64,11 +65,8 @@ CORS_ALLOW_HEADERS = [
 ]
 
 #MEDIA
-# Actual directory user files go to
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
-
-# URL used to access the media
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Application definition
@@ -100,6 +98,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 EMAIL_BACKEND= 'django.core.mail.backends.console.EmailBackend'

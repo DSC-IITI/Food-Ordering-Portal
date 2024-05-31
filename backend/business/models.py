@@ -13,7 +13,7 @@ class Hotel(models.Model):
     nonVeg = models.BooleanField()
     veg = models.BooleanField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    hotel_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    hotel_image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
