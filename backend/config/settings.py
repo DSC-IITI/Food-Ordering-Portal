@@ -63,6 +63,13 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
+#MEDIA
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
+
+# URL used to access the media
+MEDIA_URL = '/media/'
+
 
 # Application definition
 
