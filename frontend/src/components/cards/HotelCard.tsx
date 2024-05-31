@@ -3,13 +3,14 @@ import Image from "next/image";
 import foodImg from "@/assets/pbm.jpg";
 import Link from "next/link";
 
-interface HotelListParams {
+export interface HotelListParams {
   id: number;
   name: string;
   minPrice: number;
   rating: number;
   veg: boolean;
   nonVeg: boolean;
+  hotel_image: string;
 }
 
 function RatingStar(params: { yellow: boolean }) {
@@ -39,12 +40,24 @@ export const HotelCard = (params: { hotel: HotelListParams }) => {
     }
   });
 
+  var img_given = false;
+
+  if (params.hotel.hotel_image === null) {
+    img_given = false;
+  } else {
+    img_given = true;
+  }
+
   return (
     <>
       <Link href={`/restaurant/${params.hotel.id}`}>
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
-          <div className="overflow-hidden">
-            <Image src={foodImg} alt="Food Image" />
+        <div className="md:w-80 w-[85vw] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
+          <div className="flex justify-center relative overflow-hidden">
+            {img_given ? (
+              <img src={`${params.hotel.hotel_image}`} alt="hotel image" />
+            ) : (
+              <img src="/pbm.jpg" alt="hotel Image" />
+            )}
           </div>
           <div className="px-5 pb-5">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -87,7 +100,7 @@ export const HotelCard = (params: { hotel: HotelListParams }) => {
               <span className="text-xl font-bold text-gray-900 dark:text-white">
                 Starting from ₹ {params.hotel.minPrice}
               </span>
-              <div className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <div className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <div className="flex flex-row">
                   View More
                   <svg

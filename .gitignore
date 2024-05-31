@@ -3,3 +3,5 @@ backend/db.sqlite3
 __pycache__
 migrations
 .env
+render.yaml
+mediafiles

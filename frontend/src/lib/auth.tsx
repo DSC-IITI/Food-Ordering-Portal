@@ -1,4 +1,5 @@
-const BASE_URL = "http://127.0.0.1:8000/api/v1";
+const API_BACKEND = process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL = `${API_BACKEND}/api/v1`;
 
 function getCookie(name: string) {
   let cookieValue = null;

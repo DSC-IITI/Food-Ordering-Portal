@@ -1,16 +1,7 @@
 import React from "react";
 import { HotelCard } from "@/components/cards/HotelCard";
 import { getHotelList } from "@/lib/api";
-import { getUser } from "@/lib/auth";
-
-interface HotelListParams {
-  id: number;
-  name: string;
-  minPrice: number;
-  rating: number;
-  veg: boolean;
-  nonVeg: boolean;
-}
+import { HotelListParams } from "@/components/cards/HotelCard";
 
 async function Home() {
   const hotelList: [HotelListParams] = await getHotelList();

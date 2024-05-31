@@ -2,6 +2,9 @@ from django.db import models
 from customer.models import Cart
 from django.contrib.auth.models import User
 
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
 class Hotel(models.Model):
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
@@ -10,6 +13,7 @@ class Hotel(models.Model):
     nonVeg = models.BooleanField()
     veg = models.BooleanField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    hotel_image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
