@@ -18,6 +18,7 @@ import os
 env = environ.Env()
 environ.Env.read_env(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))  # Reads the .env file
 
+
 # URLS
 BASE_DIR = Path(__file__).resolve().parent.parent
 CLOUDINARY_URL = env('CLOUDINARY_URL')
@@ -157,11 +158,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Database settings
 DATABASES = {
-    'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to SQLite database file
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
