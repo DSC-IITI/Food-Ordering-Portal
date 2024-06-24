@@ -35,27 +35,17 @@ export interface LoginApiResponse {
 }
 
 export async function login(data: LoginPostData) {
+  const csrftoken = getCookie("csrftoken")!;
   const response = await fetch(`${BASE_URL}/auth/login/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-CSRFToken": csrftoken,
     },
     body: JSON.stringify(data),
   });
   const res: LoginApiResponse = await response.json();
-  localStorage.setItem("token", res["key"]);
   return response.ok;
-}
-
-export function isAuthenticated() {
-  "use client";
-  if (localStorage.getItem("token") == "") {
-    return false;
-  } else if (localStorage.getItem("token") === null) {
-    return false;
-  } else {
-    return true;
-  }
 }
 
 export async function logout() {
@@ -66,7 +56,6 @@ export async function logout() {
   const res = await fetch(`${BASE_URL}/auth/logout/`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       "X-CSRFToken": csrftoken,
     },
     credentials: "include",

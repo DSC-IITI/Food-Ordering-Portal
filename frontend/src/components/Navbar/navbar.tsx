@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { isAuthenticated, logout } from "@/lib/auth";
+import { logOut } from "@/lib/api";
 
-export default function Navbar(params: { toggleSidebar: () => void }) {
-  var [isLoggedIn, updateIsLoggedIn] = useState(false);
-  useEffect(() => {
-    updateIsLoggedIn(isAuthenticated());
-  }, []);
+export default function Navbar(params: {
+  toggleSidebar: () => void;
+  loggedIn: string | null | undefined;
+}) {
   return (
     <nav className="navbar md:h-[8vh] md:justify-between justify-center">
       <Link href="/">
@@ -19,8 +18,8 @@ export default function Navbar(params: { toggleSidebar: () => void }) {
         <a href="/menu">
           <img src="discount.png" alt="" style={{ width: "20px" }} /> Offers
         </a>
-        {isLoggedIn ? (
-          <Link href="/" onClick={logout}>
+        {params.loggedIn ? (
+          <Link href="/" onClick={logOut}>
             Sign Out
           </Link>
         ) : (

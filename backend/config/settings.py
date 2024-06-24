@@ -121,7 +121,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
