@@ -16,16 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import CustomerViewSet, OrderViewSet, PaymentMethodViewSet
 from api.views import display
 from django.conf import settings
 from django.conf.urls.static import static
-
-router = DefaultRouter()
-router.register(r'customers', CustomerViewSet)
-router.register(r'orders', OrderViewSet)
-router.register(r'payment-methods', PaymentMethodViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +28,4 @@ urlpatterns = [
     path('api/v1/auth/registration/', 
          include('dj_rest_auth.registration.urls')),
     path('',display),
-    path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
