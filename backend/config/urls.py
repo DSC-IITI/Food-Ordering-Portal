@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/v1/auth/registration/', 
          include('dj_rest_auth.registration.urls')),
     path('',display),
+    path('api/v1/oauth/', include('drf_social_oauth2.urls', namespace='drf'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

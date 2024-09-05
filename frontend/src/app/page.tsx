@@ -1,10 +1,20 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { HotelCard } from "@/components/cards/HotelCard";
-import { getHotelList } from "@/lib/api";
+import { getHotelList } from "@/helpers/api";
 import { HotelListParams } from "@/components/cards/HotelCard";
 
-async function Home() {
-  const hotelList: [HotelListParams] = await getHotelList();
+function Home() {
+  const [hotelList, setHotelList] = React.useState<HotelListParams[]>([]);
+
+  React.useEffect(() => {
+    const fetchHotelList = async () => {
+      const list: HotelListParams[] = await getHotelList();
+      setHotelList(list);
+    };
+
+    fetchHotelList();
+  }, []);
 
   return (
     <>

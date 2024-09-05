@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LoginPostData, login } from "@/lib/auth";
+import { LoginPostData, login } from "@/helpers/auth";
 
 const LoginForm = () => {
   const router = useRouter();
 
   const [user, setUser] = useState<LoginPostData>({
     username: "",
-    email: "",
     password: "",
   });
 
@@ -52,11 +51,10 @@ const LoginForm = () => {
                 type="email"
                 placeholder="Email"
                 required
-                value={user.email}
+                value={user.username}
                 onChange={(e) => {
                   setUser({
                     ...user,
-                    email: e.target.value,
                     username: e.target.value,
                   });
                 }}
