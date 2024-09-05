@@ -85,7 +85,6 @@ INSTALLED_APPS = [
     'business',
     'customer',
     'payment',
-    'authentication',
     
 
     #3rd party
