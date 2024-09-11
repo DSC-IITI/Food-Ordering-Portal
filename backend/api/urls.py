@@ -4,6 +4,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from customer.views import CartDetailView, AddItemToCartView, UpdateCartItemView, RemoveItemFromCartView
+from payment.views import PaymentListCreateView, PaymentDetailView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -26,5 +27,7 @@ urlpatterns = [
     path('cart/add/', AddItemToCartView.as_view(), name='add_item_to_cart'),
     path('cart/update/<int:cart_item_id>/', UpdateCartItemView.as_view(), name='update_cart_item'),
     path('cart/remove/<int:cart_item_id>/', RemoveItemFromCartView.as_view(), name='remove_item_from_cart'),
+    path('payments/', PaymentListCreateView.as_view(), name='payment-list-create'),
+    path('payments/<int:pk>/', PaymentDetailView.as_view(), name='payment-detail'),
 ]
 
