@@ -1,5 +1,4 @@
 from django.db import models
-from customer.models import Cart
 from django.contrib.auth.models import User
 
 def upload_to(instance, filename):
@@ -23,7 +22,6 @@ class FoodItem(models.Model):
     price = models.IntegerField(range(1, 10000))
     veg = models.BooleanField()
     nonVeg = models.BooleanField()
-    carts = models.ManyToManyField(Cart, blank=True)
     hotels = models.ManyToManyField(Hotel, related_name='food_items')
 
     def __str__(self) -> str:
