@@ -16,9 +16,12 @@ def send_welcome_email(sender, instance, created, **kwargs):
         
         # Optional plain text content
         text_content = f"Hi {instance.username},\n\nThank you for signing up on our platform!"
+
+        print(instance.email)
+        print(instance.username)
         
         # HTML content - include user email in context
-        html_content = render_to_string('welcome_email.html', {
+        html_content = render_to_string('welcome-email.html', {
             'user': instance
         })
         
@@ -29,17 +32,17 @@ def send_welcome_email(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Payment)
-def send_welcome_email(sender, instance, created, **kwargs):
+def send_order_email(sender, instance, created, **kwargs):
     if created:
-        subject = "Welcome to IITI Foodie!"
+        subject = "Order update"
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = [instance.user.email]
         
         # Optional plain text content
-        text_content = f"Hi {instance.user.username},\n\nThank you for signing up on our platform!"
+        text_content = f"Hi {instance.user.username},\n\nThank you for ordering on our platform!"
         
         # HTML content - include user email in context
-        html_content = render_to_string('welcome_email.html', {
+        html_content = render_to_string('order-email.html', {
             'user': instance.user
         })
         
