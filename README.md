@@ -26,5 +26,5 @@ You can view the frontend at http://localhost:3000/
 Visit http://127.0.0.1:8000/api/v1/ to view the backend
 
 ## Live at-
-- Backend - https://food-ordering-portal-new.onrender.com/api/v1/
-- Frontend - https://food-ordering-portal.vercel.app/
+- Backend - [https://food-ordering-portal-new.onrender.com/api/v1/](https://food-ordering-portal-tjph.onrender.com/api/v1/)
+- Frontend - [https://food-ordering-portal.vercel.app/](https://food-ordering-portal.vercel.app)
