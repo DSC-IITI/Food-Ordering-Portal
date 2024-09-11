@@ -3,8 +3,8 @@
 import { useState } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { RegisterPostData } from "@/lib/auth";
-import { register } from "@/lib/auth";
+import { RegisterPostData } from "@/helpers/auth";
+import { register } from "@/helpers/auth";
 
 const RegisterForm = () => {
   const router = useRouter();

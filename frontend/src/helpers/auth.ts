@@ -17,12 +17,58 @@ export interface UserDetailsFC {
     last_name: string;
   }
 
+export interface RegisterPostData {
+  username: string;
+  email: string;
+  password1: string;
+  password2: string;
+}
+
+export async function register(data: RegisterPostData) {
+  const response = await fetch(`${BASE_URL}/auth/registration/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.ok;
+}
+
 export async function login(data: LoginPostData) {
-    const res = await apiCall("/oauth/token", {method: "POST", body: {...data, grant_type: "password", client_secret: "prince1234", client_id: "Zai6FR4SCfzCQTNOEnNcBaRF0qNCkezrPoOSolff"}, isAuth: false});
+  // Construct the URL-encoded body string
+  const bodyParams = new URLSearchParams({
+    grant_type: 'password',
+    client_id: process.env.CLIENT_ID!,
+    client_secret: process.env.CLIENT_SECRET!,
+    username: data.username,
+    password: data.password,
+  });
+
+  console.log(bodyParams.toString());
+
+  try {
+    const response = await fetch('http://localhost:8000/api/v1/oauth/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: bodyParams.toString(), // Convert to URL-encoded string
+    });
+
+    const res = await response.json();
     console.log(res);
-    setCookie("accessToken", res.access_token);
-    setCookie("refreshToken", res.refresh_token);
-    return res;
+
+    if (response.ok) {
+      setCookie('accessToken', res.access_token);
+      setCookie('refreshToken', res.refresh_token);
+    }
+
+    return response.ok;
+  } catch (error) {
+    console.error('Error during login:', error);
+    return false;
+  }
 }
 
 export async function getUserDetails() {

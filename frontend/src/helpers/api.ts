@@ -9,6 +9,7 @@ interface ApiCallOptions {
   body?: object | null;
   next?: object | null;
   formData?: FormData | null;
+  headers?: any;
 }
 
 export const apiCall = async (
@@ -19,6 +20,7 @@ export const apiCall = async (
     body = null,
     formData = null,
     next = null,
+    headers = {},
   }: ApiCallOptions = {}
 ) => {
   const accessToken = getCookie("accessToken");
@@ -30,17 +32,14 @@ export const apiCall = async (
   let requestUrl = `${BASE_URL}${path}/`;
   const csrftoken = getCSRFCookie("csrftoken")!;
 
-  console.log(csrftoken)
-
-  const headers: HeadersInit = {};
-
   const req: any = {
     method: method,
   };
 
   if ((method == "POST" || method == "PATCH") && body) {
     req["body"] = JSON.stringify(body);
-    headers["Content-Type"] = "application/json";
+    if(headers["Content-Type"]){
+    }else { headers["Content-Type"] = "application/json";}
   }
   if ((method == "POST" || method == "PATCH") && formData) {
     req["body"] = formData;
@@ -53,10 +52,11 @@ export const apiCall = async (
   if (isAuth) {
     headers["Authorization"] = `Bearer ${accessToken}`;
   }
-
+  if(csrftoken){
     headers["X-CSRFToken"] = csrftoken;
+  }
 
-
+  console.log(headers)
   req["headers"] = headers;
 
   if (next) {
