@@ -48,7 +48,7 @@ export async function login(data: LoginPostData) {
   console.log(bodyParams.toString());
 
   try {
-    const response = await fetch('http://localhost:8000/api/v1/oauth/token', {
+    const response = await fetch(`${BASE_URL}/oauth/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

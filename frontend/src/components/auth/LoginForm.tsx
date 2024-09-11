@@ -19,6 +19,7 @@ const LoginForm = () => {
     setError(null);
 
     const res = await login(user);
+    console.log(res);
     if (res) {
       router.push("/");
     } else {
