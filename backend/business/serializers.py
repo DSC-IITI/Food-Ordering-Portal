@@ -15,7 +15,7 @@ class HotelSerializer(serializers.ModelSerializer):
 
 class FoodItemSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'name', 'price', 'veg', 'nonVeg')
+        fields = ('id', 'name', 'price', 'veg', 'nonVeg', 'image')
         model = FoodItem
 
 class HotelDetailSerializer(serializers.ModelSerializer):

@@ -1,25 +1,26 @@
 import "./globals.css";
-import Header from "@/components/header/header";
-import Head from "next/head";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Navbar from "@/components/Navbar/navbar";
 
-export const metadata = {
-  title: "Food Ordering Portal",
-  description: "Done by Prince, Sameer, Tripti, Anurag, Tanvi",
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "IITI Foodie",
+  description:
+    "Food delivery site made by group ( Prince Kumar, Sameer, Tripti, Tanvi, Anurag",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
-      <body className="h-screen w-screen">
-        <Header />
-        {children}
+      <body className={inter.className}>
+        <Navbar />
+        <main className="min-h-screen bg-orange-50">{children}</main>
       </body>
     </html>
   );

@@ -23,6 +23,7 @@ class FoodItem(models.Model):
     veg = models.BooleanField()
     nonVeg = models.BooleanField()
     hotels = models.ManyToManyField(Hotel, related_name='food_items')
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

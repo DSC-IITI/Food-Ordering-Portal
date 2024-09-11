@@ -87,3 +87,7 @@ function getCSRFCookie(name: string) {
 export async function getHotelList() {
     return apiCall("/hotels", {method: "GET"});
 }
+
+export async function getHotelDetail(id: string) {
+    return apiCall(`/hotels/${id}`, {method: "GET"});
+}
