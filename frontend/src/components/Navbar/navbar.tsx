@@ -1,25 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { isLoggedIn, logout } from "@/helpers/auth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  useEffect(() => {
+    async function setUser() {
+      const user = await isLoggedIn();
+      setLoggedInUser(user);
+    }
+    setUser();
+  }, []);
 
   return (
     <nav className="bg-orange-500 text-white">
@@ -39,12 +40,6 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
-                href="/menu"
-                className="hover:bg-orange-600 px-3 py-2 rounded-md"
-              >
-                Menu
-              </Link>
-              <Link
                 href="/about"
                 className="hover:bg-orange-600 px-3 py-2 rounded-md"
               >
@@ -56,30 +51,38 @@ const Navbar = () => {
               >
                 Contact
               </Link>
-              {!isLoggedIn ? (
+              {loggedInUser && !loggedInUser.username ? (
                 <>
-                  <Button
-                    variant="outline"
-                    className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
-                  >
-                    Sign Up
-                  </Button>
+                  <Link href={"/login"}>
+                    <Button
+                      variant="outline"
+                      className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href={"/register"}>
+                    <Button
+                      variant="outline"
+                      className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
                 </>
               ) : (
-                <Button
-                  variant="outline"
-                  className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
+                <>
+                  <span className="text-white">
+                    Welcome, <u>{loggedInUser?.username}</u>
+                  </span>
+                  <Button
+                    variant="outline"
+                    className="text-black hover:text-white bg-opacity-50 border-white hover:bg-orange-600"
+                    onClick={logout}
+                  >
+                    Logout
+                  </Button>
+                </>
               )}
             </div>
           </div>
@@ -109,12 +112,6 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/menu"
-              className="hover:bg-orange-600 block px-3 py-2 rounded-md"
-            >
-              Menu
-            </Link>
-            <Link
               href="/about"
               className="hover:bg-orange-600 block px-3 py-2 rounded-md"
             >
@@ -126,30 +123,38 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            {!isLoggedIn ? (
+            {loggedInUser && !loggedInUser.username ? (
               <>
-                <Button
-                  variant="outline"
-                  className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
-                  onClick={handleLogin}
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="outline"
-                  className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
-                >
-                  Sign Up
-                </Button>
+                <Link href={"/login"}>
+                  <Button
+                    variant="outline"
+                    className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link href={"/register"}>
+                  <Button
+                    variant="outline"
+                    className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
               </>
             ) : (
-              <Button
-                variant="outline"
-                className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
+              <>
+                <span className="text-white">
+                  Welcome, <u>{loggedInUser?.username}</u>
+                </span>
+                <Button
+                  variant="outline"
+                  className="text-black hover:text-white border-white hover:bg-orange-600 bg-opacity-50 w-full mt-2"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </>
             )}
           </div>
         </div>

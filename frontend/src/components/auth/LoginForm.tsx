@@ -23,7 +23,6 @@ const LoginForm = () => {
       router.push("/");
     } else {
       setError("Login failed. Please check your credentials.");
-      // router.push("/login-error");
     }
   };
 

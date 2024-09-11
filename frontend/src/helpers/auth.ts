@@ -39,8 +39,8 @@ export async function login(data: LoginPostData) {
   // Construct the URL-encoded body string
   const bodyParams = new URLSearchParams({
     grant_type: 'password',
-    client_id: process.env.CLIENT_ID!,
-    client_secret: process.env.CLIENT_SECRET!,
+    client_id: process.env.NEXT_PUBLIC_CLIENT_ID!,
+    client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET!,
     username: data.username,
     password: data.password,
   });
@@ -71,6 +71,17 @@ export async function login(data: LoginPostData) {
   }
 }
 
+export async function logout() {
+  deleteCookie('accessToken');
+  deleteCookie('refreshToken');
+  window.location.reload()
+}
+
 export async function getUserDetails() {
     return apiCall("/auth/user", {method: "GET"});
+}
+
+export async function isLoggedIn () {
+  const user = await apiCall("/auth/user", {method: "GET"})
+  return user;
 }

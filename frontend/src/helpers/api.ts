@@ -55,8 +55,6 @@ export const apiCall = async (
   if(csrftoken){
     headers["X-CSRFToken"] = csrftoken;
   }
-
-  console.log(headers)
   req["headers"] = headers;
 
   if (next) {
@@ -90,4 +88,20 @@ export async function getHotelList() {
 
 export async function getHotelDetail(id: string) {
     return apiCall(`/hotels/${id}`, {method: "GET"});
+}
+
+export async function get_cart() {
+    return apiCall("/cart", {method: "GET"});
+}
+
+export async function add_to_cart(data: {food_item_id: string}) {
+    return apiCall("/cart/add", {method: "POST", body: data});
+}
+
+export async function patch_cart(data: {quantity: number}, cart_item_id: string,) {
+    return apiCall(`/cart/update/${cart_item_id}`, {method: "PATCH", body: data});
+}
+
+export async function delete_cart_item(cart_item_id: string) {
+    return apiCall(`/cart/remove/${cart_item_id}`, {method: "DELETE"});
 }
