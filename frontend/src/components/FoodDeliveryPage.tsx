@@ -146,7 +146,7 @@ export default function FoodDeliveryPage({
             </CardHeader>
             <CardFooter className="flex justify-between items-center bg-white">
               <span className="text-lg font-semibold text-orange-600">
-                ${item.price.toFixed(2)}
+                Rs. {item.price.toFixed(2)}
               </span>
               <Button
                 onClick={() => addToCart(item)}
