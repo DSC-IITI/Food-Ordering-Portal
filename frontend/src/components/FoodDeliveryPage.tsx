@@ -144,9 +144,11 @@ export default function FoodDeliveryPage({
                 {item.description}
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex justify-between items-center">
-              <span className="text-lg font-semibold text-blue-300">
-                ${item.price.toFixed(2)}
+
+            <CardFooter className="flex justify-between items-center bg-white">
+              <span className="text-lg font-semibold text-orange-600">
+                Rs. {item.price.toFixed(2)}
+
               </span>
               <Button
                 onClick={() => addToCart(item)}
