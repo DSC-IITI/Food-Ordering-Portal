@@ -110,12 +110,12 @@ export default function FoodDeliveryPage({
   };
 
   return (
-    <div className="container mx-auto p-4 relative min-h-screen bg-orange-50">
+    <div className="container mx-auto p-4 relative min-h-screen bg-black text-gray-100">
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-orange-600">
+        <h1 className="text-4xl font-bold text-orange-400">
           {hotelDetails.name}
         </h1>
-        <p className="text-orange-800">
+        <p className="text-gray-300">
           {hotelDetails.address} | Starting at Rs.
           {hotelDetails.minPrice.toFixed(2)}
         </p>
@@ -125,9 +125,9 @@ export default function FoodDeliveryPage({
         {foodItems.map((item) => (
           <Card
             key={item.id}
-            className="overflow-hidden border-2 border-orange-200 hover:border-orange-400 transition-colors"
+            className="overflow-hidden border-2 border-gray-700 hover:border-blue-500 transition-colors bg-gray-800"
           >
-            <div className="relative h-48 bg-orange-100">
+            <div className="relative h-48 bg-gray-700">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -135,22 +135,22 @@ export default function FoodDeliveryPage({
                 objectFit="cover"
               />
             </div>
-            <CardHeader className="bg-white">
-              <CardTitle className="text-orange-600">
+            <CardHeader>
+              <CardTitle className="text-blue-300">
                 {item.name} {item.nonVeg && <RedBox />}{" "}
                 {item.veg && <GreenBox />}
               </CardTitle>
-              <CardDescription className="text-orange-700">
+              <CardDescription className="text-gray-400">
                 {item.description}
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex justify-between items-center bg-white">
-              <span className="text-lg font-semibold text-orange-600">
+            <CardFooter className="flex justify-between items-center">
+              <span className="text-lg font-semibold text-blue-300">
                 ${item.price.toFixed(2)}
               </span>
               <Button
                 onClick={() => addToCart(item)}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-orange-500 hover:border-orange-700 text-white"
               >
                 Add to Cart
               </Button>
@@ -160,7 +160,7 @@ export default function FoodDeliveryPage({
       </div>
 
       <Button
-        className="fixed bottom-8 right-8 rounded-full p-8 bg-orange-500 hover:bg-orange-600"
+        className="fixed bottom-8 right-8 rounded-full p-8 bg-orange-500 hover:bg-orange-600 text-white"
         onClick={() => setIsCartOpen(true)}
       >
         <ShoppingCart className="h-6 w-6" />
@@ -174,26 +174,26 @@ export default function FoodDeliveryPage({
 
       {isCartOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end">
-          <div className="bg-white w-full max-w-md p-6 overflow-y-auto">
+          <div className="bg-gray-800 w-full max-w-md p-6 overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-orange-600">Your Cart</h2>
+              <h2 className="text-2xl font-bold text-blue-400">Your Cart</h2>
               <Button variant="ghost" onClick={() => setIsCartOpen(false)}>
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 text-gray-300" />
                 <span className="sr-only">Close cart</span>
               </Button>
             </div>
             {cartItems.length === 0 ? (
-              <p className="text-orange-800">Your cart is empty.</p>
+              <p className="text-gray-300">Your cart is empty.</p>
             ) : (
               <>
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="relative flex justify-between items-center mb-4 bg-orange-50 p-4 rounded-lg"
+                    className="relative flex justify-between items-center mb-4 bg-gray-700 p-4 rounded-lg"
                   >
                     <div className="absolute top-1 right-1">
                       <X
-                        className="h-4 w-4 text-orange-500 cursor-pointer"
+                        className="h-4 w-4 text-gray-400 cursor-pointer"
                         onClick={() => removeFromCart(item.id.toString())}
                       />
                     </div>
@@ -208,10 +208,10 @@ export default function FoodDeliveryPage({
                         />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-orange-600">
+                        <h3 className="font-semibold text-blue-300">
                           {item.food_item.name}
                         </h3>
-                        <p className="text-sm text-orange-700">
+                        <p className="text-sm text-gray-400">
                           ${item.food_item.price.toFixed(2)} each
                         </p>
                       </div>
@@ -221,16 +221,18 @@ export default function FoodDeliveryPage({
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.food_item.id, -1)}
+                        className="text-gray-300 border-gray-600"
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
-                      <span className="mx-2 font-semibold">
+                      <span className="mx-2 font-semibold text-gray-300">
                         {item.quantity}
                       </span>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => updateQuantity(item.food_item.id, 1)}
+                        className="text-gray-300 border-gray-600"
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
@@ -239,16 +241,16 @@ export default function FoodDeliveryPage({
                 ))}
                 <div className="mt-6">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="font-semibold text-orange-800">
+                    <span className="font-semibold text-gray-300">
                       Total:
                     </span>
-                    <span className="font-bold text-lg text-orange-600">
+                    <span className="font-bold text-lg text-blue-300">
                       ${getTotalPrice()}
                     </span>
                   </div>
                   <Link href="/payment">
                     <Button
-                      className="w-full bg-orange-500 hover:bg-orange-600"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                       size="lg"
                     >
                       Proceed to Checkout
