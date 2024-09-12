@@ -108,11 +108,10 @@ export default function FoodDeliveryPage({
       .reduce((total, item) => total + item.food_item.price * item.quantity, 0)
       .toFixed(2);
   };
-
   return (
-    <div className="container mx-auto p-4 relative min-h-screen bg-black text-gray-100">
+    <div className="container mx-auto p-4 relative min-h-screen bg-gray-900 text-gray-100">
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-orange-400">
+        <h1 className="text-4xl font-bold text-blue-400">
           {hotelDetails.name}
         </h1>
         <p className="text-gray-300">
@@ -144,15 +143,13 @@ export default function FoodDeliveryPage({
                 {item.description}
               </CardDescription>
             </CardHeader>
-
-            <CardFooter className="flex justify-between items-center bg-white">
-              <span className="text-lg font-semibold text-orange-600">
-                Rs. {item.price.toFixed(2)}
-
+            <CardFooter className="flex justify-between items-center">
+              <span className="text-lg font-semibold text-blue-300">
+                ${item.price.toFixed(2)}
               </span>
               <Button
                 onClick={() => addToCart(item)}
-                className="bg-orange-500 hover:border-orange-700 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 Add to Cart
               </Button>
@@ -162,7 +159,7 @@ export default function FoodDeliveryPage({
       </div>
 
       <Button
-        className="fixed bottom-8 right-8 rounded-full p-8 bg-orange-500 hover:bg-orange-600 text-white"
+        className="fixed bottom-8 right-8 rounded-full p-8 bg-blue-600 hover:bg-blue-700 text-white"
         onClick={() => setIsCartOpen(true)}
       >
         <ShoppingCart className="h-6 w-6" />
@@ -266,4 +263,5 @@ export default function FoodDeliveryPage({
       )}
     </div>
   );
+}
 }
