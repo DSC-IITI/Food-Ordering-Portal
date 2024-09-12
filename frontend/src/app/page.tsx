@@ -69,7 +69,7 @@ export default function Home() {
                     className="w-full"
                   >
                     <Button className="w-full bg-orange-500 hover:bg-orange-600">
-                      Buy Now
+                      Order Now
                     </Button>
                   </Link>
                 </CardFooter>
